@@ -40,6 +40,17 @@
     </app-course-card>
   </div>
 
+  <div style="display: flex; padding: 6px;">
+    <app-courses-list [courses]="courses" [authors]="authors" [editable]="true"
+                      (showCourse)="logShowCourse($event)"
+                      (editCourse)="logEditCourse($event)"
+                      (deleteCourse)="logDeleteCourse($event)"></app-courses-list>
+  </div>
+
+  <div style="display: flex; padding: 6px;">
+    <app-course-info [course]="courses[0]" [authors]="authors"></app-course-info>
+  </div>
+
   <!-- Login Form component -->
   <!--<app-login-form></app-login-form>-->
 

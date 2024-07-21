@@ -22,11 +22,11 @@ export class CourseCardComponent {
     creationDate: new Date(),
     duration: 0,
     authors: [],
-  }
+  };
   @Input() authors: {
     id: string,
     name: string
-  }[] = []
+  }[] = [];
   @Input() editable: boolean = false;
   @Output() clickOnShow: EventEmitter<string> = new EventEmitter<string>();
 

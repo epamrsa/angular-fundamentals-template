@@ -1,0 +1,8 @@
+<div *ngFor="let course of courses">
+    <app-course-card [course]="course" [authors]="authors" [editable]="editable"
+                     (clickOnShow)="showCourseButtonClick($event)">
+        <app-button [iconName]="'trash'" (click)="deleteCourseButtonClick(course.id)"></app-button>
+        &nbsp;
+        <app-button [iconName]="'pencil'" (click)="editCourseButtonClick(course.id)"></app-button>
+    </app-course-card>
+</div>

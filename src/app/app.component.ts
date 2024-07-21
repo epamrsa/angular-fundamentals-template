@@ -8,7 +8,7 @@ import { mockedAuthorsList, mockedCoursesList } from "@shared/mocks/mock";
 })
 export class AppComponent {
   title = 'courses-app';
-  authors = mockedAuthorsList
+  authors = mockedAuthorsList;
   courses = mockedCoursesList.map(course => {
     return {
       id: course.id,
@@ -18,6 +18,18 @@ export class AppComponent {
       creationDate: new Date(course.creationDate),
       authors: course.authors
     }
-  })
+  });
+
+  logShowCourse(id: string) {
+    console.log("SHOW: " + id);
+  }
+
+  logEditCourse(id: string) {
+    console.log("EDIT: " + id);
+  }
+
+  logDeleteCourse(id: string) {
+    console.log("DELETE: " + id);
+  }
 
 }
