@@ -8,7 +8,7 @@
 
 <div class="app-root">
 
-  <div style="display: flex;">
+  <div style="display: flex; padding: 6px;">
     <app-button [buttonText]="'Show Course'"></app-button>
     &nbsp;
     <app-button [iconName]="'trash'"></app-button>
@@ -20,14 +20,25 @@
   <!--<app-search></app-search>-->
 
   <!-- Info component -->
-  <div style="display: flex;">
+  <div style="display: flex; padding: 6px;">
     <app-info [title]="'Your List Is Empty'" [text]="'Please use Add New Course button to add your first course'">
       <app-button [buttonText]="'Add New Course'"></app-button>
     </app-info>
   </div>
 
   <!-- Course Card component -->
-  <!--<app-course-card></app-course-card>-->
+  <div style="display: flex; flex-direction: column; padding: 6px;">
+    <app-course-card [course]="courses[0]" [authors]="authors" [editable]="true">
+      <app-button [iconName]="'trash'"></app-button>
+      &nbsp;
+      <app-button [iconName]="'pencil'"></app-button>
+    </app-course-card>
+    <app-course-card [course]="courses[1]" [authors]="authors" [editable]="false">
+      <app-button [iconName]="'trash'"></app-button>
+      &nbsp;
+      <app-button [iconName]="'pencil'"></app-button>
+    </app-course-card>
+  </div>
 
   <!-- Login Form component -->
   <!--<app-login-form></app-login-form>-->

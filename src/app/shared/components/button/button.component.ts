@@ -14,6 +14,6 @@ export class ButtonComponent {
   }
 
   // Use the names for the inputs `buttonText` and `iconName`.
-  @Input() buttonText!: String
-  @Input() iconName!: IconProp
+  @Input() buttonText!: string;
+  @Input() iconName!: IconProp;
 }
