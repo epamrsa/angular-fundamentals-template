@@ -1,10 +1,30 @@
-<app-header></app-header>
+<app-header>
+  <p style="padding-right: 20px;">Harry Potter</p>
+  <app-button [buttonText]="'Logout'"></app-button>
+</app-header>
+<app-header>
+  <app-button [buttonText]="'Login'"></app-button>
+</app-header>
+
 <div class="app-root">
+
+  <div style="display: flex;">
+    <app-button [buttonText]="'Show Course'"></app-button>
+    &nbsp;
+    <app-button [iconName]="'trash'"></app-button>
+    &nbsp;
+    <app-button [iconName]="'pencil'"></app-button>
+  </div>
+
   <!-- Search component -->
   <!--<app-search></app-search>-->
 
   <!-- Info component -->
-  <!--<app-info></app-info>-->
+  <div style="display: flex;">
+    <app-info [title]="'Your List Is Empty'" [text]="'Please use Add New Course button to add your first course'">
+      <app-button [buttonText]="'Add New Course'"></app-button>
+    </app-info>
+  </div>
 
   <!-- Course Card component -->
   <!--<app-course-card></app-course-card>-->
@@ -20,4 +40,5 @@
 
   <!-- Modal component -->
   <!-- <app-modal [message]="'Message'" [title]="'Title'" [okButtonText]="'Ok'" [cancelButtonText]="'Cancel'"></app-modal> -->
+
 </div>
