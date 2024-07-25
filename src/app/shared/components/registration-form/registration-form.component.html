@@ -5,8 +5,7 @@
       <div class="form__control">
         <label for="name">Name</label>
         <!--Use the name `name` for the form control.-->
-        <input type="text" name="name" id="name" placeholder="Input text"
-               required="{{name.touched || submitted}}" minlength="6"
+        <input type="text" name="name" id="name" placeholder="Input text" required minlength="6"
                [formControl]="name"/>
         <div class="form__control_errors">
           <span id="nameRequiredErrorMessage" class="text-danger"
@@ -18,21 +17,17 @@
       <div class="form__control">
         <!--Use the name `email` for the form control.-->
         <label for="email">Email</label>
-        <input type="text" name="email" id="email" placeholder="Input text"
-               required="{{email.touched || submitted}}"
+        <input type="text" name="email" id="email" placeholder="Input text" required emailValidator
                [formControl]="email"/>
-        <div class="form__control_errors">
-          <span id="emailRequiredErrorMessage" class="text-danger"
-                *ngIf="email.errors?.['required'] && (email.touched || submitted)">Email is required.</span>
-          <span id="emailIncorrectErrorMessage" class="text-danger"
-                *ngIf="email.errors?.['emailValidator'] && (email.touched || submitted)">Email is incorrect.</span>
-        </div>
+        <span id="emailRequiredErrorMessage" class="text-danger"
+              *ngIf="email.errors?.['required'] && (email.touched || submitted)">Email is required.</span>
+        <span id="emailIncorrectErrorMessage" class="text-danger"
+              *ngIf="email.errors?.['emailValidator'] && (email.touched || submitted)">Email is incorrect.</span>
       </div>
       <div class="form__control">
         <!--Use the name `password` for the form control.-->
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" placeholder="Input text"
-               required="{{password.touched || submitted}}"
+        <input type="password" name="password" id="password" placeholder="Input text" required
                [formControl]="password"/>
         <span id="passwordErrorMessage" class="text-danger"
               *ngIf="password.errors?.['required'] && (password.touched || submitted)">Password is required.</span>
