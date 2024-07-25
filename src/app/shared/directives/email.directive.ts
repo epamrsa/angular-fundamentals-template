@@ -1,5 +1,5 @@
 import { Directive } from "@angular/core";
-import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from "@angular/forms";
+import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn } from "@angular/forms";
 
 @Directive({
     selector: '[emailValidator]',
@@ -11,8 +11,13 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from "@an
 })
 export class EmailValidatorDirective implements Validator {
     // Add your code here
-    private emailRe = /.+@.+\..+/;
     validate(control: AbstractControl): ValidationErrors | null {
-        return this.emailRe.test(control.value) ? null : { emailValidator: { email: control.value } };
+        return emailValidator()(control);
     }
+}
+
+export function emailValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        return /^$|.+@.+\..+/.test(control.value) ? null : { emailValidator: { email: control.value } };
+    };
 }
