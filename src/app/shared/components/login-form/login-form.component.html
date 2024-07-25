@@ -8,9 +8,9 @@
           <!--Use the name `email` for the form control.-->
           <input type="text" name="email" id="email" placeholder="Input text" required emailValidator
                  #email="ngModel" [(ngModel)]="emailValue"/>
-          <span id="emailRequiredErrorMessage" class="text-danger"
+          <span id="emailErrorMessage" class="text-danger"
                 *ngIf="email.errors?.['required'] && (email.touched || loginForm.submitted)">Email is required.</span>
-          <span id="emailIncorrectErrorMessage" class="text-danger"
+          <span id="emailErrorMessage" class="text-danger"
                 *ngIf="email.errors?.['emailValidator'] && (email.touched || loginForm.submitted)">Email is incorrect.</span>
         </div>
         <div class="form__control">

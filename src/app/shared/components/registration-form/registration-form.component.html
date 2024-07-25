@@ -9,9 +9,9 @@
           <input type="text" name="name" id="name" placeholder="Input text" required minlength="6"
                  formControlName="name"/>
           <div class="form__control_errors">
-            <span id="nameRequiredErrorMessage" class="text-danger"
+            <span id="nameErrorMessage" class="text-danger"
                   *ngIf="registrationForm.controls.name.errors?.['required'] && (registrationForm.controls.name.touched || submitted)">Name is required.</span>
-            <span id="nameLengthErrorMessage" class="text-danger"
+            <span id="nameErrorMessage" class="text-danger"
                   *ngIf="registrationForm.controls.name.errors?.['minlength'] && (registrationForm.controls.name.touched || submitted)">Name is too short.</span>
           </div>
         </div>
@@ -20,9 +20,9 @@
           <label for="email">Email</label>
           <input type="text" name="email" id="email" placeholder="Input text" required emailValidator
                  formControlName="email"/>
-          <span id="emailRequiredErrorMessage" class="text-danger"
+          <span id="emailErrorMessage" class="text-danger"
                 *ngIf="registrationForm.controls.email.errors?.['required'] && (registrationForm.controls.email.touched || submitted)">Email is required.</span>
-          <span id="emailIncorrectErrorMessage" class="text-danger"
+          <span id="emailErrorMessage" class="text-danger"
                 *ngIf="registrationForm.controls.email.errors?.['emailValidator'] && (registrationForm.controls.email.touched || submitted)">Email is incorrect.</span>
         </div>
         <div class="form__control">
