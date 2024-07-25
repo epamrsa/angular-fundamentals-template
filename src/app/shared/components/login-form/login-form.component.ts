@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
@@ -9,4 +9,8 @@ import { NgForm } from '@angular/forms';
 export class LoginFormComponent {
   @ViewChild("loginForm") public loginForm!: NgForm;
   //Use the names `email` and `password` for form controls.
+  @ViewChild("email") public email!: NgModel;
+  @ViewChild("password") public password!: NgModel;
+  emailValue!: string;
+  passwordValue!: string;
 }

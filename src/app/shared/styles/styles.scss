@@ -28,6 +28,11 @@ $color-red: #FF0000;
         margin-bottom: 24px;
     }
 
+    &__control_errors {
+        display: flex;
+        flex-direction: column;
+    }
+
     &__action {
         margin-top: 54px;
     }
