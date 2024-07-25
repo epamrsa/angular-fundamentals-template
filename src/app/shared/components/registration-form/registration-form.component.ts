@@ -10,9 +10,9 @@ import { emailValidator } from "@shared/directives/email.directive";
 export class RegistrationFormComponent {
   registrationForm = new FormGroup({
     // Use the names `name`, `email`, `password` for the form controls.
-    name: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    email: new FormControl('', [Validators.required, emailValidator()]),
-    password: new FormControl('', [Validators.required])
+    name: new FormControl("", [Validators.required, Validators.minLength(6)]),
+    email: new FormControl("", [Validators.required, emailValidator()]),
+    password: new FormControl("", [Validators.required])
   })
   submitted = false;
 }
