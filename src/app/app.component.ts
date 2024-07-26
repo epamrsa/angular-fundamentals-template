@@ -32,4 +32,8 @@ export class AppComponent {
     console.log("DELETE: " + id);
   }
 
+  logSearch(value: string) {
+    console.log("SEARCH: " + value);
+  }
+
 }

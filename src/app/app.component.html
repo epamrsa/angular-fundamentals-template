@@ -17,7 +17,9 @@
   </div>
 
   <!-- Search component -->
-  <!--<app-search></app-search>-->
+  <div style="display: flex; padding: 6px;">
+    <app-search placeholder="Input text" (search)="logSearch($event)"></app-search>
+  </div>
 
   <!-- Info component -->
   <div style="display: flex; padding: 6px;">

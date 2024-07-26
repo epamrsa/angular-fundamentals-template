@@ -39,7 +39,7 @@
           <input type="number" id="duration" name="duration" placeholder="Input duration" required min="0"
                  formControlName="duration"/>
           <div class="course__duration">
-            {{ courseDurationFormatted() }}
+            {{ courseForm.controls.duration.value | duration }}
           </div>
         </div>
         <span id="durationErrorMessage" class="text-danger"

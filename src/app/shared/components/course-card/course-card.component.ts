@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Inject, Input, LOCALE_ID, Output } from '@angular/core';
-import { formatDate } from "@angular/common";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-course-card',
@@ -30,21 +29,8 @@ export class CourseCardComponent {
   @Input() editable: boolean = false;
   @Output() clickOnShow: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(
-      @Inject(LOCALE_ID) private localeId: string
-  ) {}
-
   showCourseButtonClick(value: string) {
     this.clickOnShow.emit(value);
-  }
-
-  courseDateFormatted() {
-    return formatDate(this.course.creationDate, "dd.MM.yyyy", this.localeId);
-  }
-
-  courseDurationFormatted() {
-    if (this.course.duration < 60) return this.course.duration + " minutes";
-    else return Math.floor(this.course.duration / 60) + ":" + this.course.duration % 60 + " hours";
   }
 
   courseAuthorsNames() {

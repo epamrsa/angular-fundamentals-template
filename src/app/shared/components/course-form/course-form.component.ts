@@ -26,13 +26,6 @@ export class CourseFormComponent {
   });
   submitted = false;
 
-  courseDurationFormatted() {
-    let duration = this.courseForm.controls.duration.value ? parseInt(this.courseForm.controls.duration.value) : null;
-    if (duration == null || duration < 0) return "";
-    if (duration < 60) return duration + " minutes";
-    return Math.floor(duration / 60) + ":" + duration % 60 + " hours";
-  }
-
   createAuthor() {
     if (this.courseForm.controls.authors.valid) {
       this.courseForm.controls.authors.push(this.fb.control(this.courseForm.controls.author.value));
