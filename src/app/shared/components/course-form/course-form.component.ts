@@ -21,6 +21,7 @@ export class CourseFormComponent {
     description: ["", [Validators.required, Validators.minLength(2)]],
     author: ["", [Validators.minLength(2), authorValidator(2)]],
     authors: this.fb.array([]),
+    courseAuthors: this.fb.array([]),
     duration: ["", [Validators.required, Validators.min(0)]]
   });
   submitted = false;
@@ -39,8 +40,14 @@ export class CourseFormComponent {
     }
   }
 
-  addToCourseAuthors(index: number) {}
+  addToCourseAuthors(index: number) {
+    this.courseForm.controls.courseAuthors.push(this.courseForm.controls.authors.at(index));
+    this.courseForm.controls.authors.removeAt(index)
+  }
 
-  removeFromCourseAuthors(index: number) {}
+  removeFromCourseAuthors(index: number) {
+    this.courseForm.controls.authors.push(this.courseForm.controls.courseAuthors.at(index));
+    this.courseForm.controls.courseAuthors.removeAt(index)
+  }
 
 }

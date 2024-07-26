@@ -69,6 +69,22 @@
             &nbsp;
             <app-button [iconName]="'plus'" (click)="addToCourseAuthors(i)"></app-button>
           </div>
+          <div class="course__authors-item" *ngIf="courseForm.controls.authors.controls.length == 0">
+            Author list is empty.
+          </div>
+        </div>
+      </div>
+      <h3>Course Authors</h3>
+      <div class="form__control">
+        <div class="course__authors" formArrayName="courseAuthors">
+          <div class="course__authors-item" *ngFor="let author of courseForm.controls.courseAuthors.controls; let i = index">
+            {{ author.value }}
+            &nbsp;
+            <app-button [iconName]="'trash'" (click)="removeFromCourseAuthors(i)"></app-button>
+          </div>
+          <div class="course__authors-item" *ngIf="courseForm.controls.courseAuthors.controls.length == 0">
+            Author list is empty.
+          </div>
         </div>
       </div>
       <div class="separator"></div>
