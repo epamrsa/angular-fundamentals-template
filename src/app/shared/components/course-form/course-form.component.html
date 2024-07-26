@@ -32,9 +32,8 @@
         <span id="descriptionErrorMessage" class="text-danger"
               *ngIf="courseForm.controls.description.errors?.['minlength'] && (courseForm.controls.description.touched || submitted)">Description is too short.</span>
       </div>
-      <div class="separator"></div>
-      <h3>Duration</h3>
       <div class="form__control">
+        <label for="duration">Duration</label>
         <div class="course__flex">
           <!--Use the name `duration` for the form array.-->
           <input type="number" id="duration" name="duration" placeholder="Input duration" required min="0"
@@ -51,21 +50,28 @@
       <div class="separator"></div>
       <h3>Authors</h3>
       <div class="form__control">
+        <label for="author">Author Name</label>
         <div class="course__flex">
           <!--Use the name `author` for the form control.-->
           <input type="text" id="author" name="author" placeholder="Input Author Name" minlength="2" authorValidator="2"
                  formControlName="author"/>
-          <app-button id="createAuthor" [buttonText]="'Create Author'"></app-button>
+          <app-button id="createAuthor" [buttonText]="'Create Author'" (click)="createAuthor()"></app-button>
         </div>
         <span id="authorErrorMessage" class="text-danger"
               *ngIf="courseForm.controls.author.errors?.['minlength'] && (courseForm.controls.author.touched || submitted)">New author is too short.</span>
         <span id="authorErrorMessage" class="text-danger"
               *ngIf="courseForm.controls.author.errors?.['authorValidator'] && (courseForm.controls.author.touched || submitted)">New author should contain only latin letters and numbers.</span>
-        <div class="course__authors">
+        <h4>Authors List</h4>
+        <div class="course__authors" formArrayName="authors">
           <!--Use the name `authors` for the form array.-->
-          ::Authors::
+          <div class="course__authors-item" *ngFor="let author of courseForm.controls.authors.controls; let i = index">
+            {{ author.value }}
+            &nbsp;
+            <app-button [iconName]="'plus'" (click)="addToCourseAuthors(i)"></app-button>
+          </div>
         </div>
       </div>
+      <div class="separator"></div>
       <div class="course__action">
         <app-button [buttonText]="'Create Course'"></app-button>
         &nbsp;
