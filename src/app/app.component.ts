@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { mockedAuthorsList, mockedCoursesList } from "@shared/mocks/mock";
+import { AuthService } from "@app/auth/services/auth.service";
+import { UserStoreService } from "@app/user/services/user-store.service";
 
 @Component({
   selector: 'app-root',
@@ -19,6 +21,23 @@ export class AppComponent {
       authors: course.authors
     }
   });
+
+  constructor(
+      private authService: AuthService,
+      private userStoreService: UserStoreService
+  ) {}
+
+  isAuthorized() {
+    return this.authService.isAuthorised;
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  getUserName() {
+    return this.userStoreService.name$;
+  }
 
   logShowCourse(id: string) {
     console.log("SHOW: " + id);

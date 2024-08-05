@@ -98,7 +98,7 @@ export class CoursesService {
     }
 
     getAuthorById(id: string) {
-        return this.httpClient.post<AuthorResponse>(`http://localhost:4000/authors/${id}`, id).pipe(
+        return this.httpClient.get<AuthorResponse>(`http://localhost:4000/authors/${id}`).pipe(
             map(event => event.result)
         );
     }

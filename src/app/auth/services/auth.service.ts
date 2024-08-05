@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { SessionStorageService } from "@app/auth/services/session-storage.service";
 import { BehaviorSubject } from "rxjs";
+import { Router } from "@angular/router";
 
-interface User {
-    "name": string,
+export interface User {
+    "name": string | null,
     "email": string,
     "password": string
 }
@@ -23,12 +24,13 @@ interface LoginResponse {
 })
 export class AuthService {
 
-    private isAuthorized$$ = new BehaviorSubject<boolean>(true);
+    private isAuthorized$$ = new BehaviorSubject<boolean>(this.sessionStorageService.getToken() != null);
     public isAuthorized$ = this.isAuthorized$$.asObservable();
 
     constructor(
         private sessionStorageService: SessionStorageService,
-        private httpClient: HttpClient
+        private httpClient: HttpClient,
+        private router: Router
     ) {}
 
     login(user: User) { // replace 'any' with the required interface
@@ -37,18 +39,17 @@ export class AuthService {
             if (event.successful) {
                 this.sessionStorageService.setToken(event.result);
                 this.isAuthorised = true;
+                this.router.navigateByUrl("/courses");
             }
         });
     }
 
     logout() {
         // Add your code here
-        let headers = new HttpHeaders().set("Authorization", this.sessionStorageService.getToken()!);
-        this.httpClient.delete<HttpResponse<any>>("http://localhost:4000/logout", { headers: headers }).subscribe(event => {
-            if (event.status == 200) {
-                this.sessionStorageService.deleteToken();
-                this.isAuthorised = false;
-            }
+        this.httpClient.delete<any>("http://localhost:4000/logout").subscribe(() => {
+            this.sessionStorageService.deleteToken();
+            this.isAuthorised = false;
+            this.router.navigateByUrl("/login");
         });
     }
 
@@ -68,7 +69,7 @@ export class AuthService {
     }
 
     getLoginUrl() {
-        return "login";
+        return "/login";
     }
 
 }

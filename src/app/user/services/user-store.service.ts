@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { UserService } from "@app/user/services/user.service";
-import {BehaviorSubject, tap} from "rxjs";
+import { BehaviorSubject, tap } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserStoreService {
 
-    private isAdmin$$ = new BehaviorSubject(true);
+    private isAdmin$$ = new BehaviorSubject(false);
     private name$$ = new BehaviorSubject<string>("");
     public isAdmin$ = this.isAdmin$$.asObservable();
     public name$ = this.name$$.asObservable();
 
     constructor(
         private userService: UserService
-    ) {}
+    ) {
+        this.getUser().subscribe();
+    }
 
     getUser() {
         return this.userService.getUser().pipe(tap(event => {
@@ -32,4 +34,5 @@ export class UserStoreService {
         // Add your code here. Change isAdmin$$ value
         this.isAdmin$$.next(value);
     }
+
 }

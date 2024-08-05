@@ -16,13 +16,12 @@ export class TokenInterceptor implements HttpInterceptor {
     ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this.authService.isAuthorised) {
-            req.headers.set("Authorization", this.sessionStorageService.getToken()!);
-        }
-        return next.handle(req).pipe(tap(event => {
+        let authReq = this.authService.isAuthorised ?
+            req.clone({headers: req.headers.set("Authorization", this.sessionStorageService.getToken()!)}) :
+            req;
+        return next.handle(authReq).pipe(tap(event => {
             if (event.type === HttpEventType.Response && event.status == 401) {
                 this.authService.logout();
-                this.router.navigate([this.authService.getLoginUrl()]);
             }
         }));
     }

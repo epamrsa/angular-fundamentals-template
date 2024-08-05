@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
+import { AuthService } from "@app/auth/services/auth.service";
 
 @Component({
   selector: 'app-login-form',
@@ -13,4 +14,16 @@ export class LoginFormComponent {
   @ViewChild("password") public password!: NgModel;
   emailValue!: string;
   passwordValue!: string;
+
+  constructor(
+    private authService: AuthService
+  ) {}
+
+  login(event: any) {
+    this.loginForm.onSubmit(event);
+    if(this.email.errors == null) {
+      this.authService.login({email: this.emailValue!, password: this.passwordValue!, name: null});
+    }
+  }
+
 }

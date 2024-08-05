@@ -1,82 +1,13 @@
 <app-header>
-  <p style="padding-right: 20px;">Harry Potter</p>
-  <app-button [buttonText]="'Logout'"></app-button>
-</app-header>
-<app-header>
-  <app-button [buttonText]="'Login'"></app-button>
+  <ng-container *ngIf="isAuthorized()">
+    <p style="padding-right: 20px;">{{ getUserName() | async }}</p>
+    <app-button buttonText="Logout" (click)="logout()"></app-button>
+  </ng-container>
+  <ng-container *ngIf="!isAuthorized()">
+    <app-button buttonText="Login" routerLink="login"></app-button>
+  </ng-container>
 </app-header>
 
 <div class="app-root">
-
-  <div style="display: flex; padding: 6px;">
-    <app-button [buttonText]="'Show Course'"></app-button>
-    &nbsp;
-    <app-button [iconName]="'trash'"></app-button>
-    &nbsp;
-    <app-button [iconName]="'pencil'"></app-button>
-  </div>
-
-  <!-- Search component -->
-  <div style="display: flex; padding: 6px;">
-    <app-search placeholder="Input text" (search)="logSearch($event)"></app-search>
-  </div>
-
-  <!-- Info component -->
-  <div style="display: flex; padding: 6px;">
-    <app-info [title]="'Your List Is Empty'" [text]="'Please use Add New Course button to add your first course'">
-      <app-button [buttonText]="'Add New Course'"></app-button>
-    </app-info>
-  </div>
-
-  <!-- Course Card component -->
-  <div style="display: flex; flex-direction: column; padding: 6px;">
-    <app-course-card [course]="courses[0]" [authors]="authors" [editable]="true">
-      <app-button [iconName]="'trash'"></app-button>
-      &nbsp;
-      <app-button [iconName]="'pencil'"></app-button>
-    </app-course-card>
-    <app-course-card [course]="courses[1]" [authors]="authors" [editable]="false">
-      <app-button [iconName]="'trash'"></app-button>
-      &nbsp;
-      <app-button [iconName]="'pencil'"></app-button>
-    </app-course-card>
-  </div>
-
-  <div style="display: flex; padding: 6px;">
-    <app-courses-list [courses]="courses" [authors]="authors" [editable]="true"
-                      (showCourse)="logShowCourse($event)"
-                      (editCourse)="logEditCourse($event)"
-                      (deleteCourse)="logDeleteCourse($event)"></app-courses-list>
-  </div>
-
-  <div style="display: flex; padding: 6px;">
-    <app-course-info [course]="courses[0]" [authors]="authors"></app-course-info>
-  </div>
-
-  <!-- Login Form component -->
-  <div style="display: flex; padding: 6px;">
-    <app-login-form></app-login-form>
-  </div>
-
-  <!-- Login Form component -->
-  <div style="display: flex; padding: 6px;">
-    <app-registration-form></app-registration-form>
-  </div>
-
-  <!-- Login Form component -->
-  <div style="display: flex; padding: 6px;">
-    <app-course-form></app-course-form>
-  </div>
-
-  <div style="display: flex; padding: 6px;">
-    <app-courses [courses]="courses" [authors]="authors" [editable]="true"
-                 (showCourse)="logShowCourse($event)"
-                 (editCourse)="logEditCourse($event)"
-                 (deleteCourse)="logDeleteCourse($event)"
-                 (searchCourse)="logSearch($event)"></app-courses>
-  </div>
-
-  <!-- Modal component -->
-  <!-- <app-modal [message]="'Message'" [title]="'Title'" [okButtonText]="'Ok'" [cancelButtonText]="'Cancel'"></app-modal> -->
-
+  <router-outlet></router-outlet>
 </div>
