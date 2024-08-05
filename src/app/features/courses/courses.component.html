@@ -1,0 +1,5 @@
+<app-search placeholder="Input text" (search)="searchButtonClick($event)"></app-search>
+<app-courses-list [courses]="courses" [authors]="authors" [editable]="editable"
+                  (showCourse)="showCourseButtonClick($event)"
+                  (editCourse)="editCourseButtonClick($event)"
+                  (deleteCourse)="deleteCourseButtonClick($event)"></app-courses-list>
