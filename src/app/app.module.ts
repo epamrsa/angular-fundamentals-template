@@ -11,6 +11,8 @@ import { CourseInfoModule } from "@features/course-info/course-info.module";
 import { CoursesListModule } from "@features/courses/courses-list/courses-list.module";
 import { CoursesModule } from "@features/courses/courses.module";
 import { AppRoutingModule } from "@app/app-routing.module";
+import { TokenInterceptor } from "@app/auth/interceptors/token.interceptor";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +25,17 @@ import { AppRoutingModule } from "@app/app-routing.module";
     AppRoutingModule,
     CoursesModule
   ],
-  providers: [AuthorizedGuard, NotAuthorizedGuard, CoursesService, CoursesStoreService],
+  providers: [
+    AuthorizedGuard,
+    NotAuthorizedGuard,
+    CoursesService,
+    CoursesStoreService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
