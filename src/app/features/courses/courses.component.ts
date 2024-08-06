@@ -2,6 +2,7 @@ import { map } from "rxjs";
 import { Component } from '@angular/core';
 import { CoursesStoreService } from "@app/services/courses-store.service";
 import { UserStoreService } from "@app/user/services/user-store.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-courses',
@@ -25,14 +26,15 @@ export class CoursesComponent {
 
   constructor(
       private coursesStoreService: CoursesStoreService,
-      private userStoreService: UserStoreService
+      private userStoreService: UserStoreService,
+      private router: Router
   ) {
     this.coursesStoreService.getAll();
     this.coursesStoreService.getAllAuthors();
   }
 
   showCourseButtonClick(value: string) {
-    //this.showCourse.emit(value);
+    this.router.navigateByUrl(`/courses/${value}`);
   }
 
   editCourseButtonClick(value: string) {
