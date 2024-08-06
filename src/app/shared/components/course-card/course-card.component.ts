@@ -25,8 +25,8 @@ export class CourseCardComponent {
   @Input() authors: {
     id: string,
     name: string
-  }[] = [];
-  @Input() editable: boolean = false;
+  }[] | null = null;
+  @Input() editable: boolean | null = null;
   @Output() clickOnShow: EventEmitter<string> = new EventEmitter<string>();
 
   showCourseButtonClick(value: string) {
@@ -34,7 +34,7 @@ export class CourseCardComponent {
   }
 
   courseAuthorsNames() {
-    return this.authors.filter(author => this.course.authors.indexOf(author.id) >= 0).map(author => author.name).join(", ")
+    return this.authors?.filter(author => this.course.authors.indexOf(author.id) >= 0).map(author => author.name).join(", ")
   }
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Course, CoursesService, ECourse } from "@app/services/courses.service";
+import { Author, Course, CoursesService, ECourse } from "@app/services/courses.service";
 import { BehaviorSubject, finalize } from "rxjs";
 
 @Injectable({
@@ -9,8 +9,10 @@ export class CoursesStoreService {
 
     private isLoading$$ = new BehaviorSubject(true);
     private courses$$ = new BehaviorSubject<ECourse[]>([]);
+    private authors$$ = new BehaviorSubject<Author[]>([]);
     public isLoading$ = this.isLoading$$.asObservable();
     public courses$ = this.courses$$.asObservable();
+    public authors$ = this.authors$$.asObservable();
 
     constructor(
        private coursesService: CoursesService
@@ -65,7 +67,8 @@ export class CoursesStoreService {
         // Add your code here
         this.isLoading$$.next(true);
         this.coursesService.getAllAuthors()
-            .pipe(finalize(() => this.isLoading$$.next(false)));
+            .pipe(finalize(() => this.isLoading$$.next(false)))
+            .subscribe(event => this.authors$$.next(event));
     }
 
     createAuthor(name: string) {
@@ -79,7 +82,8 @@ export class CoursesStoreService {
         // Add your code here
         this.isLoading$$.next(true);
         this.coursesService.getAuthorById(id)
-            .pipe(finalize(() => this.isLoading$$.next(false)));
+            .pipe(finalize(() => this.isLoading$$.next(false)))
+            .subscribe(event => this.authors$$.next([event]));
     }
 
 }

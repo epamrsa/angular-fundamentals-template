@@ -1,4 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { map } from "rxjs";
+import { Component } from '@angular/core';
+import { CoursesStoreService } from "@app/services/courses-store.service";
+import { UserStoreService } from "@app/user/services/user-store.service";
 
 @Component({
   selector: 'app-courses',
@@ -7,38 +10,41 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class CoursesComponent {
 
-  @Input() courses: {
-    id: string,
-    title: string,
-    description: string,
-    creationDate: Date,
-    duration: number,
-    authors: string[],
-  }[] = [];
-  @Input() authors: {
-    id: string,
-    name: string
-  }[] = [];
-  @Input() editable: boolean = false;
-  @Output() showCourse: EventEmitter<string> = new EventEmitter<string>();
-  @Output() editCourse: EventEmitter<string> = new EventEmitter<string>();
-  @Output() deleteCourse: EventEmitter<string> = new EventEmitter<string>();
-  @Output() searchCourse: EventEmitter<string> = new EventEmitter<string>();
+  courses$ = this.coursesStoreService.courses$.pipe(map(courses => courses.map(course => {
+    return {
+      id: course.id,
+      title: course.title,
+      description: course.description,
+      duration: course.duration,
+      creationDate: new Date(course.creationDate),
+      authors: course.authors
+    }
+  })));
+  authors$ = this.coursesStoreService.authors$;
+  editable$ = this.userStoreService.isAdmin$;
+
+  constructor(
+      private coursesStoreService: CoursesStoreService,
+      private userStoreService: UserStoreService
+  ) {
+    this.coursesStoreService.getAll();
+    this.coursesStoreService.getAllAuthors();
+  }
 
   showCourseButtonClick(value: string) {
-    this.showCourse.emit(value);
+    //this.showCourse.emit(value);
   }
 
   editCourseButtonClick(value: string) {
-    this.editCourse.emit(value);
+    //this.editCourse.emit(value);
   }
 
   deleteCourseButtonClick(value: string) {
-    this.deleteCourse.emit(value);
+    //this.deleteCourse.emit(value);
   }
 
   searchButtonClick(value: string) {
-    this.searchCourse.emit(value);
+    this.coursesStoreService.filterCourses(value);
   }
 
 }

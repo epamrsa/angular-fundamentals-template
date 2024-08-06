@@ -14,12 +14,12 @@ export class CoursesListComponent {
     creationDate: Date,
     duration: number,
     authors: string[],
-  }[] = [];
+  }[] | null = null;
   @Input() authors: {
     id: string,
     name: string
-  }[] = [];
-  @Input() editable: boolean = false;
+  }[] | null = null;
+  @Input() editable: boolean | null = null;
   @Output() showCourse: EventEmitter<string> = new EventEmitter<string>();
   @Output() editCourse: EventEmitter<string> = new EventEmitter<string>();
   @Output() deleteCourse: EventEmitter<string> = new EventEmitter<string>();

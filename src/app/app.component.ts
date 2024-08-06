@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { mockedAuthorsList, mockedCoursesList } from "@shared/mocks/mock";
 import { AuthService } from "@app/auth/services/auth.service";
 import { UserStoreService } from "@app/user/services/user-store.service";
 
@@ -9,18 +8,8 @@ import { UserStoreService } from "@app/user/services/user-store.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'courses-app';
-  authors = mockedAuthorsList;
-  courses = mockedCoursesList.map(course => {
-    return {
-      id: course.id,
-      title: course.title,
-      description: course.description,
-      duration: course.duration,
-      creationDate: new Date(course.creationDate),
-      authors: course.authors
-    }
-  });
 
   constructor(
       private authService: AuthService,
