@@ -36,7 +36,7 @@ const routes: Routes = [
         canLoad: [AuthorizedGuard]
     },
     {
-        path: "course/edit/:id",
+        path: "courses/edit/:id",
         component: CourseFormComponent,
         canLoad: [AuthorizedGuard],
         canActivate: [AdminGuard]

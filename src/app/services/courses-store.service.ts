@@ -30,7 +30,8 @@ export class CoursesStoreService {
         // Add your code here
         this.isLoading$$.next(true);
         this.coursesService.createCourse(course)
-            .pipe(finalize(() => this.isLoading$$.next(false)));
+            .pipe(finalize(() => this.isLoading$$.next(false)))
+            .subscribe();
     }
 
     getCourse(id: string) {
@@ -45,14 +46,16 @@ export class CoursesStoreService {
         // Add your code here
         this.isLoading$$.next(true);
         this.coursesService.editCourse(id, course)
-            .pipe(finalize(() => this.isLoading$$.next(false)));
+            .pipe(finalize(() => this.isLoading$$.next(false)))
+            .subscribe();
     }
 
     deleteCourse(id: string) {
         // Add your code here
         this.isLoading$$.next(true);
         this.coursesService.deleteCourse(id)
-            .pipe(finalize(() => this.isLoading$$.next(false)));
+            .pipe(finalize(() => this.isLoading$$.next(false)))
+            .subscribe();
     }
 
     filterCourses(value: string) {
@@ -60,7 +63,7 @@ export class CoursesStoreService {
         this.isLoading$$.next(true);
         this.coursesService.filterCourses(value)
             .pipe(finalize(() => this.isLoading$$.next(false)))
-            .subscribe(event => this.courses$$.next(event));
+            .subscribe(event => this.courses$$.next(event))
     }
 
     getAllAuthors() {
@@ -75,7 +78,8 @@ export class CoursesStoreService {
         // Add your code here
         this.isLoading$$.next(true);
         this.coursesService.createAuthor(name)
-            .pipe(finalize(() => this.isLoading$$.next(false)));
+            .pipe(finalize(() => this.isLoading$$.next(false)))
+            .subscribe();
     }
 
     getAuthorById(id: string) {

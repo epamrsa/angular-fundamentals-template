@@ -23,6 +23,7 @@ export class CoursesComponent {
   })));
   authors$ = this.coursesStoreService.authors$;
   editable$ = this.userStoreService.isAdmin$;
+  private lastSearch = "";
 
   constructor(
       private coursesStoreService: CoursesStoreService,
@@ -38,15 +39,17 @@ export class CoursesComponent {
   }
 
   editCourseButtonClick(value: string) {
-    //this.editCourse.emit(value);
+    this.router.navigateByUrl(`/courses/edit/${value}`);
   }
 
   deleteCourseButtonClick(value: string) {
-    //this.deleteCourse.emit(value);
+    this.coursesStoreService.deleteCourse(value);
+    this.coursesStoreService.filterCourses(this.lastSearch);
   }
 
   searchButtonClick(value: string) {
     this.coursesStoreService.filterCourses(value);
+    this.lastSearch = value;
   }
 
 }

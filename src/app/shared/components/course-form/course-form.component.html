@@ -55,7 +55,7 @@
           <!--Use the name `author` for the form control.-->
           <input type="text" id="author" name="author" placeholder="Input Author Name" minlength="2" authorValidator="2"
                  formControlName="author"/>
-          <app-button id="createAuthor" [buttonText]="'Create Author'" (click)="createAuthor()"></app-button>
+          <app-button id="createAuthor" buttonText="Create Author" (click)="createAuthor()"></app-button>
         </div>
         <span id="authorErrorMessage" class="text-danger"
               *ngIf="courseForm.controls.author.errors?.['minlength'] && (courseForm.controls.author.touched || submitted)">New author is too short.</span>
@@ -89,9 +89,9 @@
       </div>
       <div class="separator"></div>
       <div class="course__action">
-        <app-button [buttonText]="'Create Course'"></app-button>
+        <app-button buttonText="Create Course"></app-button>
         &nbsp;
-        <app-button [buttonText]="'Cancel'"></app-button>
+        <app-button buttonText="Cancel" (click)="cancelButtonClick()"></app-button>
       </div>
     </div>
   </div>
