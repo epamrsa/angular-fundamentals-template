@@ -3,20 +3,20 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs";
 
 export interface Course {
-    "title": string,
-    "description": string,
-    "duration": number,
-    "authors": string[]
+    title?: string,
+    description?: string,
+    duration?: number,
+    authors?: string[]
 }
 
 export interface ECourse extends Course {
-    "id": string,
-    "creationDate": string
+    id?: number,
+    creationDate?: string
 }
 
 export interface Author {
-    "id": string,
-    "name": string
+    id: string,
+    name: string
 }
 
 interface CommonResponse {
@@ -75,7 +75,7 @@ export class CoursesService {
 
     deleteCourse(id: string) {
         return this.httpClient.delete<CommonResponse>(`http://localhost:4000/courses/${id}`).pipe(
-            map(event => event.successful)
+            map(() => id)
         );
     }
 

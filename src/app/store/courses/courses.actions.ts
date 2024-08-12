@@ -16,7 +16,7 @@ export const requestFilteredCoursesSuccess = createAction(CoursesConstants.REQUE
 export const requestFilteredCoursesFail = createAction(CoursesConstants.REQUEST_FILTERED_COURSES_FAIL, props<{ error: any }>());
 
 export const requestDeleteCourse = createAction(CoursesConstants.REQUEST_DELETE_COURSE, props<{ id: string }>());
-export const requestDeleteCourseSuccess = createAction(CoursesConstants.REQUEST_DELETE_COURSE_SUCCESS);
+export const requestDeleteCourseSuccess = createAction(CoursesConstants.REQUEST_DELETE_COURSE_SUCCESS, props<{ id: string }>());
 export const requestDeleteCourseFail = createAction(CoursesConstants.REQUEST_DELETE_COURSE_FAIL, props<{ error: any }>());
 
 export const requestEditCourse = createAction(CoursesConstants.REQUEST_EDIT_COURSE, props<{ id: string, course: Course }>());

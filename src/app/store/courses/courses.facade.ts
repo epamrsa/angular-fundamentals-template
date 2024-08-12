@@ -1,20 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from "@ngrx/store";
-import { ECourse } from "@app/services/courses.service";
+import { Course, ECourse } from "@app/services/courses.service";
 import { State } from "@app/store";
-import {
-    getAllCourses, getCourse,
-    getCourses, getErrorMessage,
-    isAllCoursesLoadingSelector,
-    isSearchingStateSelector,
-    isSingleCourseLoadingSelector
-} from "@app/store/courses/courses.selectors";
-import {
-    requestAllCourses, requestCreateCourse, requestDeleteCourse,
-    requestEditCourse,
-    requestFilteredCourses,
-    requestSingleCourse
-} from "@app/store/courses/courses.actions";
+import { getAllCourses, getCourse, getCourses, getErrorMessage, isAllCoursesLoadingSelector, isSearchingStateSelector, isSingleCourseLoadingSelector } from "@app/store/courses/courses.selectors";
+import { requestAllCourses, requestCreateCourse, requestDeleteCourse, requestEditCourse, requestFilteredCourses, requestSingleCourse } from "@app/store/courses/courses.actions";
 
 @Injectable({
     providedIn: 'root'
@@ -44,11 +33,11 @@ export class CoursesStateFacade {
         this.store.dispatch(requestFilteredCourses({ title: title }));
     }
 
-    public editCourse(id: string, course: ECourse) {
+    public editCourse(course: ECourse, id: string) {
         this.store.dispatch(requestEditCourse({ id: id, course: course }));
     }
 
-    public createCourse(course: ECourse) {
+    public createCourse(course: Course) {
         this.store.dispatch(requestCreateCourse({ course: course }));
     }
 

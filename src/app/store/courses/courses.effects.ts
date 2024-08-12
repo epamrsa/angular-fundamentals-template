@@ -1,23 +1,7 @@
 import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import {
-    requestAllCourses,
-    requestAllCoursesSuccess,
-    requestAllCoursesFail,
-    requestFilteredCourses,
-    requestFilteredCoursesSuccess,
-    requestFilteredCoursesFail,
-    requestSingleCourse,
-    requestSingleCourseSuccess,
-    requestSingleCourseFail,
-    requestDeleteCourse,
-    requestDeleteCourseSuccess,
-    requestDeleteCourseFail,
-    requestEditCourse,
-    requestEditCourseSuccess,
-    requestEditCourseFail, requestCreateCourse, requestCreateCourseSuccess, requestCreateCourseFail
-} from "@app/store/courses/courses.actions";
+import { requestAllCourses, requestAllCoursesSuccess, requestAllCoursesFail, requestFilteredCourses, requestFilteredCoursesSuccess, requestFilteredCoursesFail, requestSingleCourse, requestSingleCourseSuccess, requestSingleCourseFail, requestDeleteCourse, requestDeleteCourseSuccess, requestDeleteCourseFail, requestEditCourse, requestEditCourseSuccess, requestEditCourseFail, requestCreateCourse, requestCreateCourseSuccess, requestCreateCourseFail } from "@app/store/courses/courses.actions";
 import { CoursesService } from "@app/services/courses.service";
 import { Router } from "@angular/router";
 
@@ -58,7 +42,7 @@ export class CoursesEffects {
     deleteCourse$ = createEffect(() => this.actions$.pipe(
         ofType(requestDeleteCourse),
         mergeMap(event => this.coursesService.deleteCourse(event.id).pipe(
-            map(() => requestDeleteCourseSuccess()),
+            map(event => requestDeleteCourseSuccess({ id: event })),
             catchError(error => of(requestDeleteCourseFail({ error: error })))
         ))
     ));

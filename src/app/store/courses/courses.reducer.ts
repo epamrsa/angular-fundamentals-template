@@ -1,25 +1,13 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { ECourse } from "@app/services/courses.service";
-import {
-    requestAllCourses,
-    requestAllCoursesFail,
-    requestAllCoursesSuccess,
-    requestCreateCourse, requestCreateCourseFail, requestCreateCourseSuccess,
-    requestDeleteCourse, requestDeleteCourseFail, requestDeleteCourseSuccess,
-    requestEditCourse, requestEditCourseFail, requestEditCourseSuccess,
-    requestFilteredCourses, requestFilteredCoursesFail,
-    requestFilteredCoursesSuccess,
-    requestSingleCourse,
-    requestSingleCourseFail,
-    requestSingleCourseSuccess
-} from "@app/store/courses/courses.actions";
+import { requestAllCourses, requestAllCoursesFail, requestAllCoursesSuccess, requestCreateCourse, requestCreateCourseFail, requestCreateCourseSuccess, requestDeleteCourse, requestDeleteCourseFail, requestDeleteCourseSuccess, requestEditCourse, requestEditCourseFail, requestEditCourseSuccess, requestFilteredCourses, requestFilteredCoursesFail, requestFilteredCoursesSuccess, requestSingleCourse, requestSingleCourseFail, requestSingleCourseSuccess } from "@app/store/courses/courses.actions";
 
 // Add your code here
 export const coursesFeatureKey = 'courses';
 
 export interface CoursesState {
     // Add your code here
-    allCourses: ECourse[],
+    allCourses: ECourse[] | null,
     course: ECourse | null,
     isAllCoursesLoading: boolean,
     isSingleCourseLoading: boolean,
@@ -29,12 +17,12 @@ export interface CoursesState {
 
 export const initialState: CoursesState = {
     // Add your code here
-    allCourses: [],
+    allCourses: null,
     course: null,
     isAllCoursesLoading: false,
     isSingleCourseLoading: false,
     isSearchState: false,
-    errorMessage: null
+    errorMessage: ""
 };
 
 export const coursesReducer = createReducer(
@@ -43,7 +31,8 @@ export const coursesReducer = createReducer(
 
     on(requestAllCourses, (state) => ({
         ...state,
-        isAllCoursesLoading: true
+        isAllCoursesLoading: true,
+        errorMessage: ""
     })),
     on(requestAllCoursesSuccess, (state, { courses }) => ({
         ...state,
@@ -59,12 +48,13 @@ export const coursesReducer = createReducer(
 
     on(requestSingleCourse, (state, { id }) => ({
         ...state,
-        isSingleCourseLoading: true
+        isSingleCourseLoading: true,
+        errorMessage: ""
     })),
     on(requestSingleCourseSuccess, (state, { course }) => ({
         ...state,
         isSingleCourseLoading: false,
-        allCourses: [],
+        allCourses: null,
         course: course
     })),
     on(requestSingleCourseFail, (state, { error }) => ({
@@ -75,27 +65,30 @@ export const coursesReducer = createReducer(
 
     on(requestFilteredCourses, (state, { title }) => ({
         ...state,
-        isSearchState: true
+        isSearchState: true,
+        isAllCoursesLoading: true,
+        errorMessage: ""
     })),
     on(requestFilteredCoursesSuccess, (state, { courses }) => ({
         ...state,
         isSearchState: false,
+        isAllCoursesLoading: false,
         allCourses: courses,
         course: null
     })),
     on(requestFilteredCoursesFail, (state, { error }) => ({
         ...state,
         isSearchState: false,
+        isAllCoursesLoading: false,
         errorMessage: error
     })),
 
     on(requestDeleteCourse, (state, { id }) => ({
-        ...state
+        ...state,
+        errorMessage: ""
     })),
     on(requestDeleteCourseSuccess, (state) => ({
-        ...state,
-        allCourses: [],
-        course: null
+        ...state
     })),
     on(requestDeleteCourseFail, (state, { error }) => ({
         ...state,
@@ -103,11 +96,12 @@ export const coursesReducer = createReducer(
     })),
 
     on(requestEditCourse, (state, { id, course }) => ({
-        ...state
+        ...state,
+        errorMessage: ""
     })),
     on(requestEditCourseSuccess, (state, { course }) => ({
         ...state,
-        allCourses: [],
+        allCourses: null,
         course: course
     })),
     on(requestEditCourseFail, (state, { error }) => ({
@@ -116,11 +110,12 @@ export const coursesReducer = createReducer(
     })),
 
     on(requestCreateCourse, (state, { course }) => ({
-        ...state
+        ...state,
+        errorMessage: ""
     })),
     on(requestCreateCourseSuccess, (state, { course }) => ({
         ...state,
-        allCourses: [],
+        allCourses: null,
         course: course
     })),
     on(requestCreateCourseFail, (state, { error }) => ({
