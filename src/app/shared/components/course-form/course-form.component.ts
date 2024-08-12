@@ -51,14 +51,14 @@ export class CourseFormComponent {
         this.courseForm.patchValue({
           title: event[0][0].title,
           description: event[0][0].description,
-          duration: event[0][0].duration.toString()
+          duration: event[0][0].duration ? event[0][0].duration.toString() : ""
         }, {
           emitEvent: false
         });
         this.courseForm.controls.courseAuthors.clear();
         this.courseForm.controls.authors.clear();
         event[1].forEach(value => {
-          if(event[0][0].authors.includes(value.id)) {
+          if(event[0][0].authors && event[0][0].authors.includes(value.id)) {
             this.courseForm.controls.courseAuthors.push(this.fb.control(new Author(value.id, value.name)));
           } else {
             this.courseForm.controls.authors.push(this.fb.control(new Author(value.id, value.name)));

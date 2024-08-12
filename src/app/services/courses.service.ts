@@ -10,7 +10,7 @@ export interface Course {
 }
 
 export interface ECourse extends Course {
-    id?: number,
+    id?: string | number,
     creationDate?: string
 }
 

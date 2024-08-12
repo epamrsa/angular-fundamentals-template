@@ -38,12 +38,12 @@ export class CourseInfoComponent {
   ) {
     this.coursesStoreService.authors$.subscribe(event => this.authors = event);
     this.coursesStoreService.courses$.subscribe(event => this.course = {
-      id: event[0].id,
-      title: event[0].title,
-      description: event[0].description,
-      duration: event[0].duration,
-      creationDate: new Date(event[0].creationDate),
-      authors: event[0].authors
+      id: event[0].id ? event[0].id.toString() : "",
+      title: event[0].title ? event[0].title : "",
+      description: event[0].description ? event[0].description : "",
+      duration: event[0].duration ? event[0].duration : 0,
+      creationDate: event[0].creationDate ? new Date(event[0].creationDate) : new Date(),
+      authors: event[0].authors ? event[0].authors : []
     });
     this.coursesStoreService.getAllAuthors();
     this.coursesStoreService.getCourse(this.route.snapshot.paramMap.get('id')!);

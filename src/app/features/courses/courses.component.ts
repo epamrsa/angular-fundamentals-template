@@ -13,12 +13,12 @@ export class CoursesComponent {
 
   courses$ = this.coursesStoreService.courses$.pipe(map(courses => courses.map(course => {
     return {
-      id: course.id,
-      title: course.title,
-      description: course.description,
-      duration: course.duration,
-      creationDate: new Date(course.creationDate),
-      authors: course.authors
+      id: course.id ? course.id.toString() : "",
+      title: course.title ? course.title : "",
+      description: course.description ? course.description : "",
+      duration: course.duration ? course.duration : 0,
+      creationDate: course.creationDate ? new Date(course.creationDate) : new Date(),
+      authors: course.authors ? course.authors : []
     }
   })));
   authors$ = this.coursesStoreService.authors$;
