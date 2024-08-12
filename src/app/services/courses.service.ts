@@ -57,13 +57,13 @@ export class CoursesService {
     createCourse(course: Course) { // replace 'any' with the required interface
         // Add your code here
         return this.httpClient.post<CourseResponse>("http://localhost:4000/courses/add", course).pipe(
-            map(event => event.successful)
+            map(event => event.result)
         );
     }
 
     editCourse(id: string, course: Course) { // replace 'any' with the required interface
         return this.httpClient.put<CourseResponse>(`http://localhost:4000/courses/${id}`, course).pipe(
-            map(event => event.successful)
+            map(event => event.result)
         );
     }
 

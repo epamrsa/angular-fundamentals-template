@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from '@shared/shared.module';
 import { AppComponent } from '@app/app.component';
@@ -10,6 +12,7 @@ import { TokenInterceptor } from "@app/auth/interceptors/token.interceptor";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AuthModule } from "@app/auth/auth.module";
 import { UserModule } from "@app/user/user.module";
+import { effects, reducers } from "@app/store";
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +23,9 @@ import { UserModule } from "@app/user/user.module";
     AppRoutingModule,
     HttpClientModule,
     AuthModule,
-    UserModule
+    UserModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot(effects)
   ],
   providers: [
     CoursesService,
