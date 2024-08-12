@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { State } from "@app/store/courses/courses.reducer";
 import { Store } from "@ngrx/store";
+import { ECourse } from "@app/services/courses.service";
+import { State } from "@app/store";
 import {
     getAllCourses, getCourse,
     getCourses, getErrorMessage,
@@ -8,7 +9,6 @@ import {
     isSearchingStateSelector,
     isSingleCourseLoadingSelector
 } from "@app/store/courses/courses.selectors";
-import { ECourse } from "@app/services/courses.service";
 import {
     requestAllCourses, requestCreateCourse, requestDeleteCourse,
     requestEditCourse,
